@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Form from './Components/Form/Form';
+import Login from './Components/Login/Login';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setLoggedIn(true);
+  };
+
+  const handleLogoutSuccess = () => {
+    setLoggedIn(false);
+  };
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      {
+        loggedIn ? (
+        <Form onLogoutSuccess={handleLogoutSuccess} />
+      ) : (
+        <Login onLoginSuccess={handleLoginSuccess} />
+      )}
+      
+    </div>    
+     
   );
 }
 
